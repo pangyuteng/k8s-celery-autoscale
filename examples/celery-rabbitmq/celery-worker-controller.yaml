@@ -15,6 +15,7 @@ spec:
       containers:
       - image: celery-worker
         name: worker
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5672
         resources:

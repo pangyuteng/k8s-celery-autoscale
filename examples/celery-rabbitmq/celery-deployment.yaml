@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     component: celery
-  name: celery-controller
+  name: worker-controller
 spec:
   selector:
     matchLabels:
@@ -17,8 +17,11 @@ spec:
         component: celery
     spec:
       containers:
-      - image: endocode/celery-app-add
-        name: celery
+      #- image: endocode/celery-app-add
+      #  name: celery
+      - image: celery-worker
+        name: worker
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5672
         resources:

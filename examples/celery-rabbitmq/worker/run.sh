@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Run the celery worker
-/usr/local/bin/celery -A celery_conf worker -c 1 -f /data/celery.log
+cd /data && /usr/local/bin/celery -A celery_conf worker -c 1 -b amqp://$RABBITMQ_SERVICE_SERVICE_HOST:5672
 
 # Start firing periodic tasks automatically
 #python /data/run_tasks.py

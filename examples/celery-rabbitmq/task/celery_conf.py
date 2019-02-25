@@ -20,7 +20,7 @@ from celery import Celery
 
 # Get Kubernetes-provided address of the broker service
 broker_service_host = os.environ.get('RABBITMQ_SERVICE_SERVICE_HOST')
-
+print(broker_service_host)
 app = Celery('tasks', broker='amqp://guest@%s//' % broker_service_host, backend='amqp')
 
 @app.task

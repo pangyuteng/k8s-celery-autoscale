@@ -1,8 +1,62 @@
+### a hello-world style excercise to demo kubernetes' autoscaling capability for celery workers.
+
+files used here are based off below link:
 https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/examples/celery-rabbitmq
 
-cd task
+* below tested with a physical machine with ubuntu 18.04 installed.
+* install docker and minikube
+* start minikube
+
+    minikube stop && minikube start --memory 8192 --insecure-registry localhost:5000
+
+    eval $(minikube docker-env)
+
+* build images using docker daemon within minikube
+
+    cd examples/celery-rabbitmq/task
+    
+    docker build -t celery-task .
+    
+    cd examples/celery-rabbitmq/worker
+    
+    docker build -t celery-worker .
+
+* verify docker images within minikube (different than `sudo docker images`)
+       
+    docker images 
+ 
+* start up pods/services
+
+    kubectl create -f examples/celery-rabbitmq/rabbitmq-service.yaml
+ 
+    kubectl create -f examples/celery-rabbitmq/rabbitmq-controller.yaml
+
+    kubectl create -f examples/celery-rabbitmq/flower-service.yaml
+ 
+    kubectl create -f examples/celery-rabbitmq/flower-controller.yaml
+    
+    kubectl create -f examples/celery-rabbitmq/celery-deployment.yaml 
+
+    kubectl create -f examples/celery-rabbitmq/hpa.yaml
+
+    kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
+
+
+* if docker container fails running, run docker container by itself to debug.
+   
+   docker run -t celery-worker
+   
+   docker run -t celery-task
+   
+   
+
+
+### ref. 
+https://stackoverflow.com/a/48999680/868736
+
+cd examples/celery-rabbitmq/task
 sudo docker build -t celery-task .
-cd worker
+cd examples/celery-rabbitmq/worker
 sudo docker build -t celery-worker .
 
 kubectl create -f examples/celery-rabbitmq/rabbitmq-service.yaml
@@ -11,9 +65,9 @@ kubectl create -f examples/celery-rabbitmq/rabbitmq-controller.yaml
 
 #kubectl create -f examples/celery-rabbitmq/celery-controller.yaml
 ##kubectl create -f examples/celery-rabbitmq/celery-worker-controller.yaml
-##kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
 
-kubectl create -f examples/celery-rabbitmq/celery-deployment.yaml 
+kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
+#kubectl create -f examples/celery-rabbitmq/celery-deployment.yaml 
 kubectl create -f examples/celery-rabbitmq/hpa.yaml
 kubectl autoscale deployment celery --cpu-percent=50 --min=1 --max=10
 
@@ -64,7 +118,7 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-das
 --
 WIP.
 https://kubernetes.io/blog/2016/07/autoscaling-in-kubernetes/
-
+https://github.com/kubernetes/minikube/issues/604
 
 https://plugaru.org/2018/01/03/rabbitmq-celery-kubernetes-ha/
 https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/
