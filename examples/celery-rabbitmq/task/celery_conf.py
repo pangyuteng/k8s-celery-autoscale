@@ -22,8 +22,8 @@ from celery import Celery
 broker_service_host = os.environ.get('RABBITMQ_SERVICE_SERVICE_HOST')
 app = Celery('tasks')
 app.conf.broker_url = 'amqp://guest@%s:5672//' % broker_service_host
-app.conf.result_backend = 'rpc'
-print('!!',app.conf.broker_url, app.conf.result_backend)
+#app.conf.result_backend = 'rpc'
+#print('!!',app.conf.broker_url, app.conf.result_backend)
 
 @app.task
 def add(x, y):
