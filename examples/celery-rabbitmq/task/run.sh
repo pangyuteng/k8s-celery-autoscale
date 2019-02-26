@@ -18,4 +18,4 @@
 #/usr/local/bin/celery -A celery_conf worker -f /data/celery.log &
 
 # Start firing periodic tasks automatically
-python /data/run_tasks.py
+cd /data && python run_tasks.py

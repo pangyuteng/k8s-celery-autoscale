@@ -67,7 +67,7 @@ kubectl create -f examples/celery-rabbitmq/rabbitmq-controller.yaml
 ##kubectl create -f examples/celery-rabbitmq/celery-worker-controller.yaml
 
 kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
-#kubectl create -f examples/celery-rabbitmq/celery-deployment.yaml 
+#kubectl create -f examples/celery-rabbitmq/celery-deployment.yaml
 kubectl create -f examples/celery-rabbitmq/hpa.yaml
 kubectl autoscale deployment celery --cpu-percent=50 --min=1 --max=10
 
@@ -83,13 +83,13 @@ kubectl get svc flower-service
 
 kubectl port-forward svc/flower-service 5555:5555
 
-ssh -L 9000:127.0.0.1:5555 yoyoteng@yoyoteng.ddns.net -v -v
+ssh -L 5555:127.0.0.1:5555 yoyoteng@yoyoteng.ddns.net -v -v
 
 kubectl delete pods,services flower-service
 
 kubectl delete -f examples/celery-rabbitmq/celery-controller.yaml
 
-
+kubectl exec worker-controller-5dfd669d5f-28vlk env | grep RABBITMQ
 
 
 kubectl get deployments
