@@ -1,14 +1,31 @@
 ### a hello-world style excercise to demo kubernetes' autoscaling capability for celery workers.
 
-files used here are based off below link:
-https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/examples/celery-rabbitmq
+* files used here are based off below link:
+    
+    https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/examples/celery-rabbitmq
 
 * below tested with a physical machine with ubuntu 18.04 installed.
-* install docker and minikube
-* start minikube
-
+* enable VT-X/AMD-v enabled. Enabling it in the BIOS is mandatory.
+* install virtualbox (for physical machine), docker, minikube.
+    
+    for physical machine: see below links for installation steps:
+    https://docs.docker.com/install/linux/docker-ce/ubuntu/
+    https://kubernetes.io/docs/tasks/tools/install-minikube/
+    https://askubuntu.com/questions/367248/how-to-install-virtualbox-from-command-line
+    https://github.com/aws-samples/aws-workshop-for-kubernetes/blob/master/03-path-application-development/301-local-development/readme.adoc#setup-on-ec2-if-you-do-not-virtualbox-on-your-laptop
+    https://www.radishlogic.com/kubernetes/running-minikube-in-aws-ec2-ubuntu/
+	
+* setup minikube
+    
+	ptional: sudo -i
+	
+    FOR Physical Machine:
     minikube stop && minikube start --memory 8192 --insecure-registry localhost:5000
+    
+    FOR EC2:
+    sudo minikube start --vm-driver=none --memory 8192 --insecure-registry localhost:5000 
 
+    Run below for each shell that will be executing kubectl,minikube,docker commands.
     eval $(minikube docker-env)
 
 * build images using docker daemon within minikube
