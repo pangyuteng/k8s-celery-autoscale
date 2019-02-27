@@ -1,17 +1,3 @@
-# Copyright 2016 The Kubernetes Authors All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 #FROM library/celery
 FROM python:3.6.6
 
@@ -20,6 +6,7 @@ RUN pip install --user --upgrade pip
 RUN python -m pip install --user -r /data/requirements.txt
 
 ADD celery_conf.py /data/celery_conf.py
+ADD celeryconfig.py /data/celeryconfig.py
 ADD run_tasks.py /data/run_tasks.py
 ADD run.sh /usr/local/bin/run.sh
 
