@@ -12,6 +12,6 @@ ADD run.sh /usr/local/bin/run.sh
 
 ENV C_FORCE_ROOT 1
 
-CMD ["/bin/bash", "/usr/local/bin/run.sh"]
-#WORKDIR /data
-#CMD ["python","run_tasks.py"]
+#CMD ["/bin/bash", "/usr/local/bin/run.sh"]
+WORKDIR /data
+CMD ["python","run_tasks.py"]

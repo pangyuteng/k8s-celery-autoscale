@@ -26,7 +26,7 @@ while True:
     print('hola!!!',time.time())
     add.apply_async(args=(x, y))
     print('laho!!!',time.time())
-    break
+    #break
     #res = add.delay(x, y)
     #time.sleep(5)
     #if res.ready():
