@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM library/celery
+#FROM library/celery
+FROM python:3.6.6
 
 ADD requirements.txt /data/requirements.txt
 RUN pip install --user --upgrade pip

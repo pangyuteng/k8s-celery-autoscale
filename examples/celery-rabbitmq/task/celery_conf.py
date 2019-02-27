@@ -22,6 +22,7 @@ print('yolo1')
 app = Celery('tasks')
 app.config_from_object(celeryconfig)
 print('!!',app.conf.broker_url)
+
 print('yolo2')
 @app.task
 def add(x, y):

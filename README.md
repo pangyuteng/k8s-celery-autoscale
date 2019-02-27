@@ -71,7 +71,7 @@ https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/
    
    kubectl exec -it shell-demo -- /bin/bash
    
-   python -m celery  inspect active -b amqp://10.98.194.104:5672
+   python -m celery inspect active -b amqp://$RABBITMQ_SERVICE_SERVICE_HOST
 
 
 ### ref. 
