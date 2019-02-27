@@ -21,6 +21,8 @@ https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/
     
     docker build -t celery-worker .
 
+    cd ../../..
+
 * verify docker images within minikube (different than `sudo docker images`)
        
     docker images 
@@ -42,6 +44,22 @@ https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/
     kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
 
 
+    kubectl delete -f examples/celery-rabbitmq/rabbitmq-service.yaml
+ 
+    kubectl delete -f examples/celery-rabbitmq/rabbitmq-controller.yaml
+
+    kubectl delete -f examples/celery-rabbitmq/flower-service.yaml
+ 
+    kubectl delete -f examples/celery-rabbitmq/flower-controller.yaml
+    
+    kubectl delete -f examples/celery-rabbitmq/celery-deployment.yaml 
+
+    kubectl delete -f examples/celery-rabbitmq/hpa.yaml
+
+    kubectl delete -f examples/celery-rabbitmq/celery-task-controller.yaml
+
+
+
 * if docker container fails running, run docker container by itself to debug.
    
    docker run -t celery-worker
@@ -49,6 +67,11 @@ https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/
    docker run -t celery-task
    
    
+* shell in
+   
+   kubectl exec -it shell-demo -- /bin/bash
+   
+   python -m celery  inspect active -b amqp://10.98.194.104:5672
 
 
 ### ref. 
@@ -90,7 +113,6 @@ kubectl delete pods,services flower-service
 kubectl delete -f examples/celery-rabbitmq/celery-controller.yaml
 
 kubectl exec worker-controller-5dfd669d5f-28vlk env | grep RABBITMQ
-
 
 kubectl get deployments
 

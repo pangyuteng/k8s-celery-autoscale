@@ -14,6 +14,10 @@
 
 FROM library/celery
 
+ADD requirements.txt /data/requirements.txt
+RUN pip install --user --upgrade pip
+RUN python -m pip install --user -r /data/requirements.txt
+
 ADD celery_conf.py /data/celery_conf.py
 ADD run_tasks.py /data/run_tasks.py
 ADD run.sh /usr/local/bin/run.sh

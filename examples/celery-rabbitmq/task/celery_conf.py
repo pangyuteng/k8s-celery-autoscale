@@ -15,17 +15,16 @@
 # limitations under the License.
 
 import os
+import celeryconfig
 
 from celery import Celery
-
-# Get Kubernetes-provided address of the broker service
-broker_service_host = os.environ.get('RABBITMQ_SERVICE_SERVICE_HOST')
+print('yolo1')
 app = Celery('tasks')
-app.conf.broker_url = 'amqp://guest@%s:5672//' % broker_service_host
-#app.conf.result_backend = 'rpc'
-#print('!!',app.conf.broker_url, app.conf.result_backend)
-
+app.config_from_object(celeryconfig)
+print('!!',app.conf.broker_url)
+print('yolo2')
 @app.task
 def add(x, y):
     print(x,y)
     return x + y
+print('yolo3')
