@@ -58,7 +58,14 @@ https://github.com/fabric8io/gitcontroller/tree/master/vendor/k8s.io/kubernetes/
 
     kubectl delete -f examples/celery-rabbitmq/celery-task-controller.yaml
 
-
+* port forward to look at minikube, flower
+     
+    kubectl proxy
+    
+    minikube dashboard --url
+    
+    kubectl port-forward svc/flower-service 5555:5555
+    
 
 * if docker container fails running, run docker container by itself to debug.
    
