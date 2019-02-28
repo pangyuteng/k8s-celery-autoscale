@@ -125,7 +125,10 @@
 
     kubectl get hpa
 
+    watch kubectl get hpa
 
+    https://medium.com/google-cloud/kubernetes-horizontal-pod-scaling-190e95c258f5
+    
 ### ref. 
 
 https://stackoverflow.com/a/48999680/868736
