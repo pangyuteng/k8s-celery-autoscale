@@ -5,7 +5,7 @@ metadata:
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: celery
+    name: worker-controller
   minReplicas: 3
   maxReplicas: 10
   targetCPUUtilizationPercentage: 50
