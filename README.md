@@ -45,12 +45,6 @@
     docker images 
  
 * start up pods/services
-
-
-    kubectl create -f examples/celery-rabbitmq/combined-deployment.yaml 
-    kubectl create -f examples/celery-rabbitmq/combined-hpa.yaml
-    kubectl delete -f examples/celery-rabbitmq/combined-deployment.yaml 
-    kubectl delete -f examples/celery-rabbitmq/combined-hpa.yaml
     
     
     kubectl create -f examples/celery-rabbitmq/rabbitmq-service.yaml
