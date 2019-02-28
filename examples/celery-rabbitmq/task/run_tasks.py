@@ -27,6 +27,7 @@ while True:
     print('hola!!!',time.time())
     add.apply_async(args=(x, y))
     print('laho!!!',time.time(),celeryconfig.CELERY_BROKER_URL)
+    time.sleep(10)
     #break
     #res = add.delay(x, y)
     #time.sleep(5)

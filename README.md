@@ -14,11 +14,11 @@
     https://askubuntu.com/questions/367248/how-to-install-virtualbox-from-command-line
     https://github.com/aws-samples/aws-workshop-for-kubernetes/blob/master/03-path-application-development/301-local-development/readme.adoc#setup-on-ec2-if-you-do-not-virtualbox-on-your-laptop
     https://www.radishlogic.com/kubernetes/running-minikube-in-aws-ec2-ubuntu/
-	
+     
 * setup minikube
     
-	ptional: sudo -i
-	
+    optional: sudo -i
+    
     FOR Physical Machine:
     minikube stop && minikube start --memory 8192 --insecure-registry localhost:5000
     
@@ -46,6 +46,12 @@
  
 * start up pods/services
 
+
+    kubectl create -f examples/celery-rabbitmq/combined-deployment.yaml 
+
+    kubectl create -f examples/celery-rabbitmq/combined-hpa.yaml
+    
+    
     kubectl create -f examples/celery-rabbitmq/rabbitmq-service.yaml
  
     kubectl create -f examples/celery-rabbitmq/rabbitmq-controller.yaml
@@ -59,8 +65,8 @@
     kubectl create -f examples/celery-rabbitmq/hpa.yaml
 
     kubectl create -f examples/celery-rabbitmq/celery-task-controller.yaml
-
-
+    
+    
     kubectl delete -f examples/celery-rabbitmq/rabbitmq-service.yaml
  
     kubectl delete -f examples/celery-rabbitmq/rabbitmq-controller.yaml
@@ -75,13 +81,32 @@
 
     kubectl delete -f examples/celery-rabbitmq/celery-task-controller.yaml
 
+
 * port forward to look at minikube, flower
      
+    HOST:
+    
     kubectl proxy
     
     minikube dashboard --url
     
     kubectl port-forward svc/flower-service 5555:5555
+    
+    kubectl port-forward pod/rabbitmq-controller-p5btj 15672:15672
+    
+    CLIENT:
+    
+    ssh -L 8001:127.0.0.1:8001 user@hostname -v -v
+    
+    ssh -L 8002:127.0.0.1:15672 user@hostname -v -v
+    
+    ssh -L 5555:127.0.0.1:5555 user@hostname -v -v
+    
+* view rabbitmq queues
+
+    kubectl exec -it rabbitmq-AAAA -- /bin/bash
+    
+    rabbitmq-plugins enable rabbitmq_management
     
 
 * if docker container fails running, run docker container by itself to debug.
