@@ -25,6 +25,9 @@
     FOR EC2:
     sudo minikube start --vm-driver=none --memory 8192 --insecure-registry localhost:5000 
 
+    install cpu monitor pulugin (https://github.com/kubernetes/minikube/issues/1095)
+    minikube addons enable heapster 
+
     Run below for each shell that will be executing kubectl,minikube,docker commands.
     eval $(minikube docker-env)
 
@@ -103,12 +106,6 @@
     http://localhost:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy
 
 
-* view rabbitmq queues
-
-    kubectl exec -it rabbitmq-AAAA -- /bin/bash
-    
-    rabbitmq-plugins enable rabbitmq_management
-    
 
 * if docker container fails running, run docker container by itself to debug.
    
@@ -117,11 +114,16 @@
    docker run -t celery-task
    
    
-* shell in
+* misc
    
    kubectl exec -it shell-demo -- /bin/bash
    
    python -m celery inspect active -b amqp://$RABBITMQ_SERVICE_SERVICE_HOST
+
+
+* autoscale misc
+
+    kubectl get hpa
 
 
 ### ref. 
@@ -139,6 +141,8 @@ https://kubernetes.io/docs/concepts/workloads/controllers/
 
 
 --
+
+
 WIP.
 https://kubernetes.io/blog/2016/07/autoscaling-in-kubernetes/
 https://github.com/kubernetes/minikube/issues/604
