@@ -22,7 +22,7 @@
     FOR Physical Machine:
     minikube stop && minikube start --memory 8192 --insecure-registry localhost:5000
     
-    FOR EC2:
+    FOR EC2 (not tested):
     sudo minikube start --vm-driver=none --memory 8192 --insecure-registry localhost:5000 
 
     install cpu monitor pulugin (https://github.com/kubernetes/minikube/issues/1095)
