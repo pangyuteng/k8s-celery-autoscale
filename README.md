@@ -1,3 +1,10 @@
+### dear visitors please visit Miguel article below for setting up celery in kube.
+
+ https://miguescri.com/post/2021-05-22-celery-hpa
+
+ 
+### this repo is archived.
+
 ### a hello-world style excercise to demo kubernetes' autoscaling capability for celery workers.
 
 * files used here are based off below link:
