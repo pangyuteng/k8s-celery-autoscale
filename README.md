@@ -3,7 +3,7 @@
  https://miguescri.com/post/2021-05-22-celery-hpa
 
  
-### this repo is archived.
+### ** this repo is archived **
 
 ### a hello-world style excercise to demo kubernetes' autoscaling capability for celery workers.
 
