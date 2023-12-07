@@ -1,4 +1,4 @@
-### dear visitors please visit Miguel article below for setting up celery in kube.
+### dear visitors please visit Miguel's article below for setting up celery in kube with horizontal autoscaling.
 
  https://miguescri.com/post/2021-05-22-celery-hpa
 
